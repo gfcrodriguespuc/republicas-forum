@@ -104,7 +104,10 @@ function renderLocalStorageQuestionsAndAnswers() {
   // https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
   answeredQuestionsContainerElem.textContent = "";
 
-  for (const questionAndAnswer of questionsAndAnswers) {
+  // for (const questionAndAnswer of questionsAndAnswers) {
+  // loop em ordem inversa
+  for (let i = questionsAndAnswers.length - 1; i >= 0; i--) {
+    const questionAndAnswer = questionsAndAnswers[i];
     // So renderiza se a pergunta tiver resposta
     if (questionAndAnswer.answer) {
       // Cria os elementos HTML e adiciona suas classes
