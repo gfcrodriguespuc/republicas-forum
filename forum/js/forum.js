@@ -128,17 +128,21 @@ function renderLocalStorageQuestionsAndAnswers() {
 
       // Preenche os elementos HTML
       questionEl.insertAdjacentText("afterbegin", questionAndAnswer.question);
-      questionDatetimeEl.innerText = "asasas1";
+      questionDatetimeEl.innerText = new Date().toLocaleTimeString("default", { hour: "2-digit", minute: "2-digit" });
       questionEl.appendChild(questionDatetimeEl);
 
       answerEl.insertAdjacentText("afterbegin", questionAndAnswer.answer);
-      answerDatetimeEl.innerText = "asasas2";
+      answerDatetimeEl.innerText = new Date().toLocaleTimeString("default", { hour: "2-digit", minute: "2-digit" });
       answerEl.appendChild(answerDatetimeEl);
 
       containerQuestionsAndAnswerEl.appendChild(questionEl);
       containerQuestionsAndAnswerEl.appendChild(answerEl);
 
-      datetimeEl.innerText = "bbbb";
+      datetimeEl.innerText = new Date().toLocaleDateString("default", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      });
       containerEl.appendChild(datetimeEl);
       containerEl.appendChild(containerQuestionsAndAnswerEl);
 
