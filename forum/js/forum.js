@@ -28,7 +28,9 @@ function saveQuestionInLocalstorage(question) {
   // Inicialmente a pergunta não possui resposta, ou seja answer é nulo
   const questionAndAnswerStruct = {
     question: question,
+    question_timestamp: new Date().toISOString(),
     answer: null,
+    answer_timestamp: null,
   };
 
   // Atualiza a váriavel contendo a lista de perguntas e respostas
@@ -56,6 +58,7 @@ function answerQuestionInLocalstorage(answer, questionIdx) {
   // Atualiza a pergunta da váriavel contendo a lista de perguntas e respostas
   const questionAndAnswerStruct = questionsAndAnswers[questionIdx];
   questionAndAnswerStruct.answer = answer;
+  questionAndAnswerStruct.answer_timestamp = new Date().toISOString();
 
   // Atualiza o banco de dados com o novo valor da variável
   localStorage.setItem("questions_and_answers", JSON.stringify(questionsAndAnswers));
@@ -128,17 +131,23 @@ function renderLocalStorageQuestionsAndAnswers() {
 
       // Preenche os elementos HTML
       questionEl.insertAdjacentText("afterbegin", questionAndAnswer.question);
-      questionDatetimeEl.innerText = new Date().toLocaleTimeString("default", { hour: "2-digit", minute: "2-digit" });
+      questionDatetimeEl.innerText = new Date(questionAndAnswer.question_timestamp).toLocaleTimeString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       questionEl.appendChild(questionDatetimeEl);
 
       answerEl.insertAdjacentText("afterbegin", questionAndAnswer.answer);
-      answerDatetimeEl.innerText = new Date().toLocaleTimeString("default", { hour: "2-digit", minute: "2-digit" });
+      answerDatetimeEl.innerText = new Date(questionAndAnswer.answer_timestamp).toLocaleTimeString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       answerEl.appendChild(answerDatetimeEl);
 
       containerQuestionsAndAnswerEl.appendChild(questionEl);
       containerQuestionsAndAnswerEl.appendChild(answerEl);
 
-      datetimeEl.innerText = new Date().toLocaleDateString("default", {
+      datetimeEl.innerText = new Date(questionAndAnswer.question_timestamp).toLocaleDateString("default", {
         weekday: "short",
         month: "short",
         day: "numeric",
